@@ -72,6 +72,8 @@
                 responsive: null,
                 rows: 1,
                 rtl: false,
+                track: '',
+                list: '',
                 slide: '',
                 slidesPerRow: 1,
                 slidesToShow: 1,
@@ -507,7 +509,7 @@
 
         _.$slides =
             _.$slider
-                .children( _.options.slide + ':not(.slick-cloned)')
+                .find((_.options.slide  || '>') + ':not(.slick-cloned)')
                 .addClass('slick-slide');
 
         _.slideCount = _.$slides.length;
@@ -520,12 +522,23 @@
 
         _.$slider.addClass('slick-slider');
 
-        _.$slideTrack = (_.slideCount === 0) ?
-            $('<div class="slick-track"/>').appendTo(_.$slider) :
-            _.$slides.wrapAll('<div class="slick-track"/>').parent();
+        if (_.options.track) {
+            _.$slideTrack = $(_.options.track, _.$slider)
+                .addClass('slick-track');
+        } else {
+            _.$slideTrack = (_.slideCount === 0) ?
+                $('<div class="slick-track"/>').appendTo(_.$slider) :
+                _.$slides.wrapAll('<div class="slick-track"/>').parent();
+        }
 
-        _.$list = _.$slideTrack.wrap(
-            '<div aria-live="polite" class="slick-list"/>').parent();
+        if (_.options.list) {
+            _.$list = $(_.options.list, _.$slider)
+                .attr('aria-live', 'polite')
+                .addClass('slick-list');
+        } else {
+            _.$list = _.$slideTrack.wrap(
+                '<div aria-live="polite" class="slick-list"/>').parent();
+        }
         _.$slideTrack.css('opacity', 0);
 
         if (_.options.centerMode === true || _.options.swipeToSlide === true) {
