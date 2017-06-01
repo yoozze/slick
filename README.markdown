@@ -110,6 +110,7 @@ touchThreshold | int | 5 | To advance slides, the user must swipe a length of (1
 useCSS | boolean | true | Enable/Disable CSS Transitions
 useTransform | boolean | true | Enable/Disable CSS Transforms
 variableWidth | boolean | false | Disables automatic slide width calculation
+variableHeight | boolean | false | Enable/Disable automatic height calculation for vertical sliders with variable slide height
 vertical | boolean | false | Vertical slide direction
 verticalSwiping | boolean | false | Changes swipe direction to vertical
 rtl | boolean | false | Change the slider's direction to become right-to-left
