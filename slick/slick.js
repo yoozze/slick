@@ -1028,7 +1028,6 @@
             .on('focus.slick blur.slick',
                 '*:not(.slick-arrow)', function(event) {
 
-            event.stopImmediatePropagation();
             var $sf = $(this);
 
             setTimeout(function() {
