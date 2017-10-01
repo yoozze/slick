@@ -195,8 +195,15 @@
 
         _.$slideTrack.find('.slick-active').attr({
             'aria-hidden': 'false'
-        }).find('a, input, button, select').attr({
-            'tabindex': '0'
+        }).find('a, input, button, select').each(function() {
+            var $el = $(this);
+            var tabindex = $el.data('tabindex.slick');
+
+            if (tabindex) {
+                $el.attr('tabindex', tabindex);
+            } else {
+                $el.removeAttr('tabindex');
+            }
         });
 
     };
@@ -1314,8 +1321,15 @@
         _.$slides.add(_.$slideTrack.find('.slick-cloned')).attr({
             'aria-hidden': 'true',
             'tabindex': '-1'
-        }).find('a, input, button, select').attr({
-            'tabindex': '-1'
+        }).find('a, input, button, select').each(function() {
+            var $el = $(this);
+            var tabindex = $el.data('tabindex.slick');
+
+            if (tabindex === undefined) {
+                $el.data('tabindex.slick', $el.attr('tabindex') || '');
+            }
+
+            $el.attr('tabindex', '-1');
         });
 
         _.$slideTrack.attr('role', 'listbox');
